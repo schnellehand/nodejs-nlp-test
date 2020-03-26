@@ -1,0 +1,24 @@
+{
+  "name": "nodejs-nlp-test",
+  "version": "1.0.0",
+  "description": "node.js nlp test",
+  "main": "index.js",
+  "repository": "https://github.com/schnellehand/nodejs-nlp-test",
+  "author": "schnellehand",
+  "license": "MIT",
+  "dependencies": {
+    "compromise": "^13.1.1",
+    "compromise-adjectives": "^0.0.5",
+    "compromise-dates": "^0.0.5",
+    "compromise-export": "^0.0.1",
+    "compromise-hash": "^0.0.1",
+    "compromise-html": "^0.0.1",
+    "compromise-keypress": "^0.0.1",
+    "compromise-ngrams": "^0.0.5",
+    "compromise-numbers": "^0.0.5",
+    "compromise-paragraphs": "^0.0.4",
+    "compromise-sentences": "^0.0.5",
+    "compromise-syllables": "^0.0.4",
+    "natural": "^0.6.3"
+  },
+}
