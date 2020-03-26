@@ -10,7 +10,7 @@ nlp.extend(require('compromise-sentences'))
 function parse(text) {
     let req = nlp(text)
     const conditions = ["#QuestionWord", "#Copula", "#Superlative", "#Noun", "#Adjective"]
-    const query = ["QIR"]
+    const query = ["QIREQ"]
 
     conditions.forEach(elem => {
         if(req.has(elem) === false)
@@ -39,7 +39,7 @@ function parse(text) {
 
 const req = [
     "Where is the nearest surgeons within 50km from here?",
-    "What is the most dangerous unknown object from here?"
+    "What is the most dangerous unknown object from here?",
 ]
 
 const text = req[process.argv[2] || 0]
