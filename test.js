@@ -6,6 +6,7 @@ nlp.extend(require('compromise-dates'))
 nlp.extend(require('compromise-ngrams'))
 nlp.extend(require('compromise-paragraphs'))
 nlp.extend(require('compromise-sentences'))
+nlp.extend(require('compromise-syllables'))
 
 function parse(text) {
     let req = nlp(text)
@@ -14,13 +15,15 @@ function parse(text) {
 
     conditions.forEach(elem => {
         if(req.has(elem) === false)
-        return "Failed to Parse requirement"
+        return "Failed to parsing  requirement"
     })
 
     req.clauses().map(e => {
         const target = e.nouns().toSingular()
         const number = e.numbers()
         const adj = e.adjectives()
+        console.log(e.out('tags'))
+        console.log(e.nouns())
         if(target.found) {
             query.push(target.list[0].trim().text())
         }
@@ -46,3 +49,11 @@ const text = req[process.argv[2] || 0]
 const result = parse(text)
 
 console.log(`${text} => ${result}`)
+
+const pattern = /[^a-zA-Z0-9|\\?\s]+/gi;
+
+console.log(pattern.test("Where is the nearest surgeons within 50km from here!"))
+console.log(pattern.test("Where is the nearest surgeons within 50km from here?"))
+console.log(pattern.test("Where is the nearest surgeons within 50km from here[]@?"))
+console.log(pattern.test("Where is the nearest surgeons within 50km from here."))
+console.log(pattern.test("Where is the nearest surgeons within 50km from 여기?"))
