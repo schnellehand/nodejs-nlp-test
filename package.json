@@ -19,6 +19,7 @@
     "compromise-paragraphs": "^0.0.4",
     "compromise-sentences": "^0.0.5",
     "compromise-syllables": "^0.0.4",
-    "natural": "^0.6.3"
+    "natural": "^0.6.3",
+    "xmlbuilder": "^15.1.0"
   }
 }
