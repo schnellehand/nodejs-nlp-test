@@ -9,7 +9,7 @@ nlp.extend(require('compromise-sentences'))
 nlp.extend(require('compromise-syllables'))
 
 function parse(text, retObj = false) {
-    let req = nlp(text)
+    const req = nlp(text)
     const conditions = ["#QuestionWord", "#Copula", "#Superlative", "#Noun", "#Adjective"]
     const query = ["QIREQ"]
     const obj = {}
