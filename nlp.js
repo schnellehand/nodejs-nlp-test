@@ -8,10 +8,11 @@ nlp.extend(require('compromise-paragraphs'))
 nlp.extend(require('compromise-sentences'))
 nlp.extend(require('compromise-syllables'))
 
-function parse(text) {
+function parse(text, retObj = false) {
     let req = nlp(text)
     const conditions = ["#QuestionWord", "#Copula", "#Superlative", "#Noun", "#Adjective"]
     const query = ["QIREQ"]
+    const obj = {}
 
     conditions.forEach(elem => {
         if(req.has(elem) === false)
@@ -22,27 +23,46 @@ function parse(text) {
         const target = e.nouns().toSingular()
         const number = e.numbers()
         const adj = e.adjectives()
+        const prep = e.prepositions()
+        console.log(e.out('tags'))
 
         if(target.found) {
-            query.push(target.list[0].trim().text())
+            const t = target.list[0].trim().text()
+            obj.target = t
+            query.push(t)
         }
         if(adj.found) {
+            obj.adj = []
             adj.forEach(elem => {
-                query.push(elem.trim().text())
+                const a = elem.trim().text()
+                obj.adj.push(a)
+                query.push(a)
             })
         }
         if(number.found) {
+            const n = number.list[0].trim().text()
+            obj.range = []
+            obj.range.push("radius")
+            obj.range.push(n)
             query.push("radius")
-            query.push(number.list[0].trim().text())
+            query.push(n)
+        }
+        if(prep.found) {
+            obj.prep = prep.list[0].trim().text()
+        }
+
+        if(typeof obj.range === 'undefined') {
+            obj.range = target.list[1].trim().text().replace("?", "") || "here"
         }
     })
-    /**
-     * TODO?
-     * return { text, topic, nlpObject }
-     */
-    return query.join("/").replace('?', '')
+    if(retObj === false) {
+        return query.join("/").replace('?', '')
+    } else {
+        return { topic:query.join("/").replace('?', ''), obj }
+    }
 }
 
 module.exports = {
+    process,
     parse
 }
