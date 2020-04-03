@@ -63,6 +63,5 @@ function parse(text, retObj = false) {
 }
 
 module.exports = {
-    process,
     parse
 }
